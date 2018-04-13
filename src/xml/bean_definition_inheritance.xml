@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+
+    <!--parent bean-->
+    <!--if the abstract attribute is true, then this bean is not initialized, it can be used as a
+        template-->
+    <bean id="parent_line" class="Line" abstract="true">
+        <property name="point1" ref="point1"/>
+    </bean>
+
+    <!--parent attribute used for inheritance-->
+    <bean id="child_line" class="Line" parent="parent_line">
+        <property name="point2" ref="point2"/>
+    </bean>
+
+    <bean id="point1" class="Point">
+        <property name="x" value="0"/>
+        <property name="y" value="0"/>
+    </bean>
+
+    <bean id="point2" class="Point">
+        <property name="x" value="40"/>
+        <property name="y" value="40"/>
+    </bean>
+</beans>

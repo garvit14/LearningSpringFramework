@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<!--we can define default init and destroy methods in <beans/> tag, in that case spring search for
+    those methods in every bean and calls them if their definition is found and otherwise ignores
+    them. It can be done as described below-->
+<!-- <beans default-init-method="myInit" default-destroy-method="cleanUp"> -->
+<beans>
+    <bean id="triangle" class="Triangle"/>
+
+    <!--Make a triangle object with type already instantiated-->
+    <!--It will use the setter setType(), called setter injection-->
+    <bean id="equilateral_triangle" class="Triangle">
+        <property name="type" value="Equilateral"/>
+    </bean>
+
+    <!--constructor injection i.e. injecting the values using constructor-->
+
+    <!--will automatically search for constructor with two arguments-->
+    <!--the 'type' attribute is needed only if there are overloaded constructors on the
+        basis of type of arguments, otherwise, it can be skipped-->
+    <!--Indexing is also optional-->
+    <bean id="constructor_injected_triangle" class="Triangle">
+        <constructor-arg index="0" type="java.lang.String" value="Equilateral"/>
+        <constructor-arg index="1" type="int" value="20"/>
+    </bean>
+
+    <!--defining init and destroy methods-->
+    <!--if default init and destroy methods are defined, then no need of defining them here-->
+    <bean id="callback_triangle" class="Triangle" init-method="myInit" destroy-method="cleanUp">
+        <property name="type" value="Scalene"/>
+        <property name="height" value="16"/>
+    </bean>
+</beans>

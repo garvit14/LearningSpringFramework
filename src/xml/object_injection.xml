@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+
+    <!--ref is the id of the bean from which object is to be initialized-->
+    <bean id="line" class="Line">
+        <property name="point1" ref="point1"/>
+        <!--we can also use an inner-bean if we don't want to use the inner-bean anywhere else-->
+        <!--'id' is optional for an inner bean-->
+        <!--defining point two as inner-bean-->
+        <property name="point2">
+            <bean class="Point">
+                <property name="x" value="10"/>
+                <property name="y" value="10"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!--define a bean for point 1-->
+    <bean id="point1" class="Point">
+        <property name="x" value="0"/>
+        <property name="y" value="0"/>
+    </bean>
+
+    <!--aliases can be defined to access same bean with different names-->
+    <alias name="line" alias="line-alias"/>
+</beans>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+
+    <!--autowiring can be cumbersome when there are large number of dependencies, debugging
+        becomes very tough-->
+
+    <!--in autowiring byName the bean are automatically referenced if bean id is same as the name
+        of the object declared inside the class-->
+
+    <!--scope attribute defines the scope of the bean
+        Default scope is singleton-->
+
+    <bean id="autowired_line" class="Line" autowire="byName" scope="singleton"/>
+
+    <bean id="point1" class="Point">
+        <!--using placeholders for values-->
+        <property name="x" value="${point1.pointX}"/>
+        <property name="y" value="${point1.pointY}"/>
+    </bean>
+
+    <bean id="point2" class="Point">
+        <property name="x" value="20"/>
+        <property name="y" value="20"/>
+    </bean>
+
+    <!--To enable BeanPostProcessor-->
+    <!--Only this much is sufficient-->
+    <bean class="DisplayNameBeanPostProcessor"/>
+
+    <!--To enable BeanFactoryPostProcessor-->
+    <bean class="MyBeanFactoryPostProcessor"/>
+
+    <!--Enabling the PropertyPlaceholderConfigurer which is a BeanFactoryPostProcessor
+        provided by spring-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="src/xml/config_point.property"/>
+    </bean>
+</beans>
