@@ -10,5 +10,10 @@ public class LearningSpringContinue {
         AbstractApplicationContext abstractContext = new FileSystemXmlApplicationContext("src/xml/autowire_example.xml");
         Line line = (Line) abstractContext.getBean("autowired_line");
         line.draw();
+
+        //example of @Autowire and @Qualifier annotations
+        abstractContext = new FileSystemXmlApplicationContext("src/xml/learning_annotation.xml");
+        AnnotationCircle circle = (AnnotationCircle) abstractContext.getBean("annotation_circle");
+        circle.draw();
     }
 }
